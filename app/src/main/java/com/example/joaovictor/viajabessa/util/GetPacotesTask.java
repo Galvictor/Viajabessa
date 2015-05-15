@@ -87,50 +87,51 @@ public class GetPacotesTask extends AsyncTask<ApiGetRealJson,Long,JSONArray> {
         final ArrayList<String> urls_imagens = new ArrayList<String>();
         final ArrayList<String> descricao = new ArrayList<String>();
         final ArrayList<String> id_pacote = new ArrayList<String>();
+try {
 
-        Log.d("QTD", jsonArray.length() + "");
+    for (int i = 0; i < jsonArray.length(); i++) {
 
-        for(int i=0; i<jsonArray.length();i++){
-
-            JSONObject json = null;
-            try {
-                json = jsonArray.getJSONObject(i);
-                id_pacote.add(json.getString("id"));
-                titulos.add(json.getString("nome"));
-                descricao.add(json.getString("descricao"));
-                valores.add(json.getString("valor"));
-                urls_imagens.add(json.getString("foto"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
+        JSONObject json = null;
+        try {
+            json = jsonArray.getJSONObject(i);
+            id_pacote.add(json.getString("id"));
+            titulos.add(json.getString("nome"));
+            descricao.add(json.getString("descricao"));
+            valores.add(json.getString("valor"));
+            urls_imagens.add(json.getString("foto"));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
 
-        CustomListAdapter adapter = new CustomListAdapter(context, titulos,valores,urls_imagens);
+    }
 
-        list = (ListView)context.findViewById(R.id.list);
-        list.setAdapter(adapter);
+    CustomListAdapter adapter = new CustomListAdapter(context, titulos, valores, urls_imagens);
+
+    list = (ListView) context.findViewById(R.id.list);
+    list.setAdapter(adapter);
 
         /*
         *Passos os dados para uma nova Activity (SinglePacote)->(activity_single_pacotes.xml)
          */
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+    list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Intent i = new Intent(context,SinglePacote.class);
-                i.putExtra(ID_EXTRA,String.valueOf(id));
-                i.putExtra("descricao-array",descricao);
-                i.putExtra("id-array",id_pacote);
-                i.putExtra("foto-array",urls_imagens);
-                i.putExtra("valor-array",valores);
-                context.startActivity(i);
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view,
+                                int position, long id) {
+            Intent i = new Intent(context, SinglePacote.class);
+            i.putExtra(ID_EXTRA, String.valueOf(id));
+            i.putExtra("descricao-array", descricao);
+            i.putExtra("id-array", id_pacote);
+            i.putExtra("foto-array", urls_imagens);
+            i.putExtra("valor-array", valores);
+            context.startActivity(i);
 
-            }
-        });
-
+        }
+    });
+} catch (Exception e){
+    e.printStackTrace();
+}
 
     }
 }
