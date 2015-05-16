@@ -1,4 +1,4 @@
-package com.example.joaovictor.viajabessa;
+package com.example.joaovictor.viajabessa.old;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.joaovictor.viajabessa.R;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -19,14 +20,14 @@ import java.util.Locale;
  * Created by joaovictor on 11/05/2015.
  * Classe para criar as listas com sua determinadas posições.
  */
-public class CustomListAdapter extends ArrayAdapter<String> {
+public class CustomListAdapterOLD extends ArrayAdapter<String> {
     private final Activity context;
     private final ArrayList<String> titulos;
     private final ArrayList<String> imagens;
     private final ArrayList<String> valores;
 
-    public CustomListAdapter(Activity context, ArrayList<String> titulos, ArrayList<String> valores, ArrayList<String> imagens){
-        super(context,R.layout.mylist,titulos);
+    public CustomListAdapterOLD(Activity context, ArrayList<String> titulos, ArrayList<String> valores, ArrayList<String> imagens){
+        super(context, R.layout.mylist,titulos);
 
         this.context = context;
         this.valores = valores;
@@ -56,7 +57,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         NumberFormat nfVal = NumberFormat.getCurrencyInstance(meuLocal);
 
         double valorReal = Double.parseDouble(valores.get(position));
-
+//LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.mylist, null, true);
 
